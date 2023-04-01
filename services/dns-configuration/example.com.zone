@@ -1,0 +1,64 @@
+$TTL 86400  
+@ IN  SOA	dns6.example.com.	webmaster.example.com. (  
+          2013060101
+          10800
+          3600
+          604800
+          7200)
+
+
+
+
+
+;---------------Configuracion IPv4
+@	IN	NS	dns4.example.com.
+
+example.com.	3600	  IN	    MX	20	  linuxipv4.example.com.
+linux    	    86400   IN      A         192.168.10.11 
+linuxipv4     86400   IN      A         192.168.10.11
+dns4       	  86400   IN      A         192.168.10.11
+
+www		      IN	CNAME	linuxipv4
+apache4		  IN	CNAME	linuxipv4
+ftp4		    IN	CNAME	linuxipv4
+smtp4		    IN	CNAME	linuxipv4
+imap4		    IN	CNAME	linuxipv4
+pop4		    IN	CNAME	linuxipv4
+streaming4	IN	CNAME	linuxipv4
+
+
+
+
+
+
+
+;---------------Configuracion IPv6
+@	IN	NS	dns6.example.com. 
+
+example.com.	3600	  IN	    MX	  10	linuxipv6.example.com.
+dns6       	  86400   IN      AAAA      2001:db8:1:0::0:101
+linux       	86400   IN      AAAA      2001:db8:1:0::0:101
+linuxipv6     86400   IN      AAAA      2001:db8:1:0::0:101
+
+www6  	  	IN	CNAME	linuxipv6
+apache6	  	IN	CNAME	linuxipv6
+ftp6	  	  IN	CNAME	linuxipv6 
+smtp6 		  IN	CNAME	linuxipv6
+imap6		    IN	CNAME	linuxipv6
+pop6		    IN	CNAME	linuxipv6
+streaming6	IN	CNAME	linuxipv6
+ 
+
+apache		  IN	CNAME	linux
+ftp			    IN	CNAME	linux 
+smtp		    IN	CNAME	linux
+imap  		  IN	CNAME	linux
+pop		  	  IN	CNAME	linux
+streaming 	IN	CNAME	linux
+
+
+
+
+;---------Subdominios
+dns6.subdomain.example.com.   IN AAAA   2001:db8:1:0::1:101
+subdomain.example.com.	      IN NS	    dns6.subdomain.example.com.

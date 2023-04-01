@@ -1,0 +1,10 @@
+$TTL 86400
+@	IN	SOA	dns4.example.com.	webmaster.example.com. (  
+          2013060101
+          10800
+          3600
+          604800
+          38400)
+@	IN	NS	dns4.example.com.
+
+253     IN  PTR     www.example.com.

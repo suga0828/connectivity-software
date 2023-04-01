@@ -1,0 +1,13 @@
+$TTL 86400
+@       IN      SOA     linux6.example.com.      webmaster.example.com. (
+        2013060101
+        10800
+        3600
+        604800
+        7200
+)
+@       IN      NS      linux6.example.com.
+
+1.0.1.0.0.0.0.0.0.0.0.0.0.0.0.0         IN      PTR     linux6.example.com.
+2.0.1.0.0.0.0.0.0.0.0.0.0.0.0.0         IN      PTR     win20086.example.com.
+3.0.1.0.0.0.0.0.0.0.0.0.0.0.0.0         IN      PTR     win76.example.com.
