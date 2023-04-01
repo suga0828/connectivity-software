@@ -11,6 +11,8 @@ En este repositorio encontrará guias para la configuracion de algunos servicios
 - [Despliegue de una pagina web en HTML](tutorials/web-page/README.md)
 <!-- - [Configuracion de servidor de correos](tutorials/email-server/README.md) -->
 
+---
+
 ## Anexos
 
 - [Instalacion de CentOS 7.1 en VirtualBox](https://linuxdukes.com/how-to-install-centos-7-in-virtualbox/)

@@ -31,3 +31,9 @@ Instalar el servicio Telnet:
 ```bash
   $ yum -y install telnet
 ```
+
+Instalar `netstat`:
+
+```bash
+  $ yum -y install net-tools
+```

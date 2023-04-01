@@ -1,14 +1,18 @@
-## Conexion a Internet de una maquina virtual en CentOS 7.1
+## Conexion a Internet de una maquina virtual en CentOS 7
 
 Enciende tu marquina virtual e inicia sesión como root.
 
-![login as root](./login.png)
+![login as root](../../images/login.png)
 
 Desde aca, vamos al siguiente directorio:
 
 ```bash
   cd /etc/sysconfig/network-scripts
 ```
+
+En este punto bdbemos ajustar la configuracion de la interfaz de la tarjeta de red que usaremos para conectarnos.
+
+> En mi caso es la `enp0s3`.
 
 Primero vamos a hacer un backup de nuevo archivo `ifcfg-enp0s3`, ejecutando el siguiente comando:
 
@@ -22,7 +26,7 @@ Para verificar que el backup fue creado correctamente ejecutamos el siguiente co
   ls -lah | grep ifcfg-enp0s3
 ```
 
-![listing file to check if backup was successful](./checking-interface-backup.png)
+![listing file to check if backup was successful](../../images/checking-interface-backup.png)
 
 Ahora que tenemos el backup, vamos a editar el archivo `ifcfg-enp0s3` ejecutando:
 
@@ -54,7 +58,7 @@ Para verificar que el backup fue creado correctamente ejecutamos el siguiente co
   ls -lah | grep network
 ```
 
-![listing file to check if backup was successful](./checking-network-backup.png)
+![listing file to check if backup was successful](../../images/checking-network-backup.png)
 
 Ahora agreamos algunas lineas al archivo `network`:
 
@@ -72,7 +76,7 @@ Debe ser un archivo vacio, agregamos las siguientes lineas:
 
 Deberia quedar coi algo como esto:
 
-![setting up gateway](./setting-gateway.png)
+![setting up gateway](../../images/setting-gateway.png)
 
 El valor de `GATEWAY` es la puerta de enlace de tu maquina host. En este caso, es `192.168.10.1`.
 
@@ -94,7 +98,7 @@ Para verificar que el backup fue creado correctamente ejecutamos el siguiente co
   ls -lah | grep resolv.conf
 ```
 
-![listing file to check if backup was successful](./checking-resolv-backup.png)
+![listing file to check if backup was successful](../../images/checking-resolv-backup.png)
 
 Ahora agregamos algunas lineas al archivo `resolv.conf`:
 
@@ -111,7 +115,7 @@ Inicialmente debe ser un archivo vacio, agregamos las siguientes lineas:
 
 Antes de continuar tenemos que asegurarnos que nuestra maquina virtual tiene el adaptador de red configurado correctamente. En este caso estamos usando el adaptador NAT Network Adapter. **Si tienes que configurarlo y tu maquina virtual esta encendida, tienes que reiniciarla**.
 
-![Network Adapter](./network-adapter.png)
+![Network Adapter](../../images/network-adapter.png)
 
 Ya casi estamos. Nos aseguramos de reiniciar el servicio de red ejecutando:
 
@@ -125,7 +129,9 @@ Ahora, vamos a probar nuestra conexion a internet ejecutando:
   ping google.com
 ```
 
-![ping google.com](./checking-connection.png)
+![ping google.com](../../images/checking-connection.png)
+
+---
 
 ## Solucion de problemas
 
@@ -135,4 +141,4 @@ Si quieres saber cual es la ip de tu maquina virtual, ejecuta:
   ip addr
 ```
 
-![ip addr](./ip-checking.png)
+![ip addr](../../images/ip-checking.png)
