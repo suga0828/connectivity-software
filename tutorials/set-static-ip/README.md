@@ -1,4 +1,4 @@
-## Conexion a Internet de una maquina virtual en CentOS 7
+# Configurar una IP estática en CentOS 7.1
 
 Enciende tu marquina virtual e inicia sesión como root.
 
@@ -35,8 +35,12 @@ Ahora que tenemos el backup, vamos a editar el archivo `ifcfg-enp0s3` ejecutando
 Actualiza las siguientes lineas:
 
 ```bash
-  ONBOOT=yes
+  BOOTPROTO=static
+  IPADDR=192.168.10.11
+  IPV6ADDR=2001:db8:1::101
 ```
+
+En este caso, asignamos `192.168.10.11` como IP estática y `2001:db8:1::101` como IPv6 estática.
 
 Ahora, vamos a configurar la puerta de enlace en el archivo `/etc/sysconfig/network`. Para hacerlo ejecutamos:
 
@@ -72,68 +76,21 @@ Debe ser un archivo vacio, agregamos las siguientes lineas:
   GATEWAY=192.168.10.1
 ```
 
-Deberia quedar coi algo como esto:
+Deberia quedar algo como esto:
 
 ![setting up gateway](../../images/setting-gateway.png)
 
 El valor de `GATEWAY` es la puerta de enlace de tu maquina host. En este caso, es `192.168.10.1`.
 
-Ahora vamos a configurar el name servers en el archivo `/etc/resolv.conf`. Para ir a la carpeta ejecutamos:
-
-```bash
-  cd /etc
-```
-
-Como siempre, hacemos un backup del archivo `resolv.conf` ejecutando:
-
-```bash
-  cp resolv.conf resolv.conf_backup
-```
-
-Para verificar que el backup fue creado correctamente ejecutamos el siguiente comando:
-
-```bash
-  ls -lah | grep resolv.conf
-```
-
-![listing file to check if backup was successful](../../images/checking-resolv-backup.png)
-
-Ahora agregamos algunas lineas al archivo `resolv.conf`:
-
-```bash
-  vi resolv.conf
-```
-
-Inicialmente debe ser un archivo vacio, agregamos las siguientes lineas:
-
-```bash
-  nameserver 8.8.8.8
-  nameserver 8.8.4.4
-```
-
-Antes de continuar tenemos que asegurarnos que nuestra maquina virtual tiene el adaptador de red configurado correctamente. En este caso estamos usando el adaptador NAT Network Adapter. **Si tienes que configurarlo y tu maquina virtual esta encendida, tienes que reiniciarla**.
-
-![Network Adapter](../../images/network-adapter.png)
-
-Ya casi estamos. Nos aseguramos de reiniciar el servicio de red ejecutando:
+Ahora, vamos a reiniciar el servicio de red para que los cambios surtan efecto:
 
 ```bash
   systemctl restart network
 ```
 
-Ahora, vamos a probar nuestra conexion a internet ejecutando:
-
-```bash
-  ping google.com
-```
-
-![ping google.com](../../images/checking-connection.png)
-
----
-
 ### Notas
 
-Si quieres saber cual es la ip de tu maquina virtual, ejecuta:
+Para comprobar cual es la ip de tu maquina virtual, ejecuta:
 
 ```bash
   ip addr
