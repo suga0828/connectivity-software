@@ -126,3 +126,13 @@ Ahora, vamos a probar nuestra conexion a internet ejecutando:
 ```
 
 ![ping google.com](./checking-connection.png)
+
+## Solucion de problemas
+
+Si quieres saber cual es la ip de tu maquina virtual, ejecuta:
+
+```bash
+  ip addr
+```
+
+![ip addr](./ip-checking.png)
