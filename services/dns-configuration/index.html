@@ -1,0 +1,626 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentación de Software de Conectividad">
+      
+      
+        <meta name="author" content="Alexander Sandoval">
+      
+      
+        <link rel="canonical" href="https://suga0828.github.io/connectivity-software/services/dns-configuration/">
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.5">
+    
+    
+      
+        <title>Configuracion de un servidor DNS - Software de Conectividad</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.7a7fce14.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.a0c5b2b5.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#configuracion-de-un-servidor-dns" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Software de Conectividad" class="md-header__button md-logo" aria-label="Software de Conectividad" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Software de Conectividad
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Configuracion de un servidor DNS
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/suga0828/connectivity-software" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    connectivity-software
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Software de Conectividad" class="md-nav__button md-logo" aria-label="Software de Conectividad" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Software de Conectividad
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/suga0828/connectivity-software" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    connectivity-software
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Software de Conectividad
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          Guías
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Guías
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/web-page/" class="md-nav__link">
+        Despliegue de una pagina web en HTML
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#instalacion-de-paquetes" class="md-nav__link">
+    Instalacion de paquetes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuracion-de-archivos" class="md-nav__link">
+    Configuracion de archivos
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuracion de archivos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#etcnamedconf" class="md-nav__link">
+    /etc/named.conf
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#options" class="md-nav__link">
+    options
+  </a>
+  
+    <nav class="md-nav" aria-label="options">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#logging" class="md-nav__link">
+    logging
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#zonas-ipv4" class="md-nav__link">
+    Zonas IPv4
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#zonas-ipv6" class="md-nav__link">
+    Zonas IPv6
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#archivo-de-zonas-directas" class="md-nav__link">
+    Archivo de zonas directas
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#archivo-de-zonas-inversas" class="md-nav__link">
+    Archivo de zonas inversas
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#verificaciones-de-configuracion-de-archivos-de-zona" class="md-nav__link">
+    Verificaciones de configuracion de archivos de zona
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#seleccion-del-servidor-dns" class="md-nav__link">
+    Seleccion del servidor DNS
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#verifcacion-del-servidor-dns" class="md-nav__link">
+    Verifcacion del servidor DNS
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="configuracion-de-un-servidor-dns">Configuracion de un servidor DNS</h1>
+<p>Un servidor DNS (Domain Name System) es un servicio que se utiliza para traducir los nombres de dominio de sitios web en direcciones IP (Protocolo de Internet). Cuando un usuario intenta acceder a un sitio web, el navegador web envía una solicitud al servidor DNS para resolver el nombre de dominio en una dirección IP. Una vez que se ha resuelto la dirección IP, el navegador web puede conectar con el servidor web que aloja el sitio web y solicitar su contenido.</p>
+<p>Un servidor DNS es un componente esencial de Internet que permite que los nombres de dominio se traduzcan en direcciones IP para que los usuarios puedan acceder a los sitios web. Sin un servidor DNS, los usuarios tendrían que recordar y utilizar las direcciones IP para acceder a los sitios web, lo que sería mucho más difícil que simplemente escribir un nombre de dominio fácil de recordar.</p>
+<h3 id="instalacion-de-paquetes">Instalacion de paquetes</h3>
+<p>Para instalar el servidor DNS (BIND) en CentOS 7.1, ejecute el siguiente comando:</p>
+<pre><code class="language-bash">yum -y install bind bind-chroot bind-utils bind-libs caching-nameserver
+</code></pre>
+<hr />
+<h3 id="configuracion-de-archivos">Configuracion de archivos</h3>
+<ul>
+<li>Archivo de configuracion <a href="#etcnamedconf">/etc/named.conf</a></li>
+<li><a href="#options"><em>options</em></a></li>
+<li><a href="#logging"><em>logging</em></a></li>
+<li><a href="#zonas-ipv4">Zonas IPv4</a><ul>
+<li>Zona .</li>
+<li>Zona para IPv4</li>
+</ul>
+</li>
+<li><a href="#zonas-ipv6">Zonas IPv6</a><ul>
+<li>Zonas IPv6</li>
+</ul>
+</li>
+<li>Archivo de zona directa</li>
+<li><a href="#archivo-de-zonas-directas">example.com.zone</a></li>
+<li>Archivos de zonas inversas</li>
+<li><a href="#archivo-de-zonas-inversas">192.168.10.zone</a></li>
+<li><a href="#archivo-de-zonas-inversas">2001_db8_1_0.zone</a></li>
+</ul>
+<h4 id="etcnamedconf">/etc/named.conf</h4>
+<p>El archivo <code>/etc/named.conf</code> contiene la configuracion del servidor DNS. En este archivo se especifican las zonas de DNS que el servidor maneja, asi como las opciones de configuracion del servidor.</p>
+<p>Una muestra del archivo <code>/etc/named.conf</code> se encuentra en el siguiente archivo <a href="named.conf">named.conf</a> donde se ha usado <code>example.com</code> como nombre de dominio y <code>192.168.10.11</code> y <code>2001:db8:1::101</code> como direcciones IPv4 e IPv6 del servidor DNS, respectivamente.</p>
+<h4 id="options"><em>options</em></h4>
+<p>Seccion para definir las rutas de ubicación de los archivos de configuración para cada
+una de las zonas.</p>
+<pre><code class="language-bash">options {
+  listen-on    port 53 { 127.0.0.1; 192.168.10.11; };
+  listen-on-v6 port 53 { ::1; 2001:db8:1::101; };
+
+  directory &quot;/var/named&quot;;
+  dump-file &quot;/var/named/data/cache_dump.db&quot;;
+  statistics-file &quot;/var/named/data/named_stats.txt&quot;;
+  memstatistics-file &quot;/var/named/data/named_mem_stats.txt&quot;;
+
+  allow-query     { any; };
+
+  recursion yes;
+  notify yes;
+
+  dnssec-enable yes;
+  dnssec-validation yes;
+  dnssec-lookaside auto;
+  bindkeys-file &quot;/etc/named.iscdlv.key&quot;;
+  managed-keys-directory &quot;/var/named/dynamic&quot;;
+
+  pid-file &quot;/run/named/named.pid&quot;;
+  session-keyfile &quot;/run/named/session.key&quot;;
+};
+</code></pre>
+<p>en este caso <code>192.168.10.11</code> y <code>2001:db8:1::101</code> son las IPv4 e IPv6 del servidor DNS, respectivamente.</p>
+<h5 id="logging">logging</h5>
+<p>Seccion para definir el nivel de log del servidor DNS.</p>
+<pre><code class="language-bash">logging {
+  channel default_debug {
+    file &quot;data/named.run&quot;;
+    severity dynamic;
+  };
+};
+</code></pre>
+<h5 id="zonas-ipv4">Zonas IPv4</h5>
+<p>Los servidores DNS basan sus configuraciones en la definición de zonas o dominios, y estos deben ser definidos inicialmente en el fichero “named.conf ”. Las siguientes configuraciones van a ser parte de dicho archivo:</p>
+<ul>
+<li>Zona <code>.</code></li>
+</ul>
+<pre><code>zone &quot;.&quot; IN {
+  type hintl
+  file &quot;named.ca&quot;;
+};
+
+include &quot;/etc/named.rfc1912.zones&quot;;
+include &quot;/etc/named.root.key&quot;;
+</code></pre>
+<ul>
+<li>Zona para IPv4</li>
+</ul>
+<p>En esta sección se definen las zonas para IPv4, también encontramos la definición para la resolución de dominios y direcciones IP tanto directas como inversas.</p>
+<pre><code>zone &quot;example.com&quot; IN {
+    type master;
+    file &quot;example.com.zone&quot;;
+};
+
+zone &quot;192.168.10.in-addr.arpa&quot; {
+  type master;
+  file &quot;192.168.10.zone&quot;;
+};
+</code></pre>
+<p>donde se ha usado <code>example.com</code> como nombre de dominio y <code>192.168.10</code> como porcion de red de la IPv4 del servidor DNS.</p>
+<h5 id="zonas-ipv6">Zonas IPv6</h5>
+<p>En esta sección se detallan las zonas para IPv6 y encontramos la definición para la resolución de dominios y direcciones IP tanto directas como inversas.</p>
+<ul>
+<li>Zona para IPv6</li>
+</ul>
+<pre><code>zone &quot;0.0.0.0.1.0.0.0.8.b.d.0.1.0.0.2.ip6.arpa&quot; {
+  type master;
+  file &quot;2001_db8_1_0.zone&quot;;
+};
+</code></pre>
+<h4 id="archivo-de-zonas-directas">Archivo de zonas directas</h4>
+<ul>
+<li>Archivo <a href="example.com.zone" target="_blank">/var/named/example.com.zone</a>: El archivo “example.com.zone” contiene la definición del servidor DNS para la zona directa definida en el direccionamiento para IPv4 y se indica mediante el registro NS.</li>
+</ul>
+<h4 id="archivo-de-zonas-inversas">Archivo de zonas inversas</h4>
+<ul>
+<li>
+<p>Archivo <a href="192.168.10.zone" target="_blank">/var/named/192.168.10.zone</a>: El archivo “192.168.10.zone” contiene la definición del servidor DNS para la zona inversa definida en el direccionamiento para IPv4 y se indica mediante el registro NS.</p>
+</li>
+<li>
+<p>Archivo <a href="2001_db8_1_0.zone" target="_blank">/var/named/2001_db8_1_0.zone</a>: El archivo “2001_db8_1_0.zone” contiene la definición del servidor DNS para la zona directa definida en el direccionamiento para IPv6 y se indica mediante el registro NS.</p>
+</li>
+</ul>
+<h3 id="verificaciones-de-configuracion-de-archivos-de-zona">Verificaciones de configuracion de archivos de zona</h3>
+<p>Para verificar la sintaxis de los archivos de zona, ejecute el siguiente comando:</p>
+<pre><code class="language-bash">named-checkzone example.com example.com.zone
+</code></pre>
+<pre><code class="language-bash">named-checkzone 192.168.10.zone
+</code></pre>
+<pre><code class="language-bash">named-checkzone 2001_db8_1_0.zone
+</code></pre>
+<hr />
+<h3 id="seleccion-del-servidor-dns">Seleccion del servidor DNS</h3>
+<p>Para seleccionar el servidor DNS, se debe editar el archivo <code>/etc/resolv.conf</code> y colocar la del servidor DNS.</p>
+<pre><code class="language-bash">vim /etc/resolv.conf
+</code></pre>
+<pre><code class="language-bash"># Generated by NetworkManager
+search example.com
+nameserver 2001:db8:1::101
+nameserver 192.168.10.11
+</code></pre>
+<p><img alt="set DNS ips" src="../../images/set-dns-ip.png" /></p>
+<hr />
+<h3 id="verifcacion-del-servidor-dns">Verifcacion del servidor DNS</h3>
+<p>Primero podemos reiniciar el servicio:</p>
+<pre><code>systemctl restart named
+</code></pre>
+<p>Para verificar que el servidor DNS esta desplegado adecuadamente, ejecute el siguiente comando:</p>
+<pre><code>netstat -tulpn | grep named
+</code></pre>
+<p>Para verificar el funcionamiento del servidor DNS, ejecute alguno de los siguientes comandos:</p>
+<pre><code>nslookup
+  &gt; server
+</code></pre>
+<p>Debe verse la configuracion del servidor DNS:</p>
+<p><img alt="nslookup" src="../../images/nslookup.png" /></p>
+<p>Tambien se pueden comprobar las diferentes consultas DNS con los siguientes comandos:</p>
+<pre><code class="language-bash">dig dns6.example.com AAAA
+</code></pre>
+<pre><code class="language-bash">dig MX example.com
+</code></pre>
+<pre><code class="language-bash">nslookup www.example.com
+</code></pre>
+<pre><code class="language-bash">nslookup www6.example.com
+</code></pre>
+<pre><code class="language-bash">nslookup pop6.example.com
+</code></pre>
+<pre><code class="language-bash">nslookup imap6.example.com
+</code></pre>
+<pre><code class="language-bash">nslookup smtp6.example.com
+</code></pre>
+<pre><code class="language-bash">nslookup streaming6.example.com
+</code></pre>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.407015b8.min.js"></script>
+      
+    
+  </body>
+</html>
