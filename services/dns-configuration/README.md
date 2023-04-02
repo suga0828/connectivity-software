@@ -1,4 +1,8 @@
-# Configuracion de un Servidor de Nombre de Dominios DNS (Domain Server Name)
+# Configuracion de un servidor DNS
+
+Un servidor DNS (Domain Name System) es un servicio que se utiliza para traducir los nombres de dominio de sitios web en direcciones IP (Protocolo de Internet). Cuando un usuario intenta acceder a un sitio web, el navegador web envía una solicitud al servidor DNS para resolver el nombre de dominio en una dirección IP. Una vez que se ha resuelto la dirección IP, el navegador web puede conectar con el servidor web que aloja el sitio web y solicitar su contenido.
+
+En resumen, un servidor DNS es un componente esencial de Internet que permite que los nombres de dominio se traduzcan en direcciones IP para que los usuarios puedan acceder a los sitios web. Sin un servidor DNS, los usuarios tendrían que recordar y utilizar las direcciones IP para acceder a los sitios web, lo que sería mucho más difícil que simplemente escribir un nombre de dominio fácil de recordar.
 
 ### Instalacion de paquetes
 
