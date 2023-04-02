@@ -9,7 +9,7 @@ Proporciona una variedad de características y funcionalidades para alojar sitio
 Para instalar el servidor DNS (BIND) en CentOS 7.1, ejecute el siguiente comando:
 
 ```bash
-  $ yum -y install httpd php
+yum -y install httpd php
 ```
 
 ---
@@ -19,35 +19,41 @@ Para instalar el servidor DNS (BIND) en CentOS 7.1, ejecute el siguiente comando
 Primero vamos a configurar el archivo de configuracion principal del servidor httpd, el cual se encuentra en la ruta `/etc/httpd/conf/httpd.conf`.
 
 ```bash
-  $ vim /etc/httpd/conf/httpd.conf
+vim /etc/httpd/conf/httpd.conf
 ```
 
 En el archivo de configuracion, debemos agregar la siguiente configuracion:
 
 ```
-  ServerName apache.example.com
+ServerName apache.example.com
 ```
 
-Donde www.example.com va a ser el nombre de dominio donde va a estar alojado el sitio web.
+Donde apache.example.com va a ser el nombre de dominio donde va a estar alojado el sitio web.
 
 Una vez instalado el paquete, el servicio httpd se encuentra deshabilitado. Para habilitarlo e iniciarlo, ejecute el siguiente comando:
 
 ```bash
-  $ systemctl enable httpd.service
-  $ systemctl start httpd.service
+systemctl enable httpd.service
+```
+
+```bash
+systemctl start httpd.service
 ```
 
 Tambien puede verificar el estado del servicio o detenerlo con los siguientes comandos:
 
 ```bash
-  $ systemctl status httpd.service
-  $ systemctl stop httpd.service
+systemctl status httpd.service
+```
+
+```bash
+systemctl stop httpd.service
 ```
 
 Para verificar que el servicio este funcionando correctamente puede usar el siguiente comando:
 
 ```bash
-  $ netstat -tulpn | grep httpd
+netstat -tulpn | grep httpd
 ```
 
 ---

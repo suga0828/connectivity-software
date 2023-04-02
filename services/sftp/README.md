@@ -7,7 +7,7 @@ SFTP es un protocolo de transferencia de archivos seguro que proporciona una cap
 Para establecer la conexion con un servidor SFTP en CentOS 7.1, necesita instalar el paquete openssh-server. Para instalar el paquete, ejecute el siguiente comando:
 
 ```bash
-  $ yum -y install openssh-server openssh-clients openssl
+yum -y install openssh-server openssh-clients openssl
 ```
 
 ### Verificacion del servicio SSH
@@ -15,14 +15,17 @@ Para establecer la conexion con un servidor SFTP en CentOS 7.1, necesita instala
 Una vez instalado el paquete, el servicio SSH se encuentra deshabilitado. Para habilitarlo e iniciarlo, ejecute el siguiente comando:
 
 ```bash
-  $ systemctl enable sshd.service
-  $ systemctl start sshd.service
+systemctl enable sshd.service
+```
+
+```bash
+systemctl start sshd.service
 ```
 
 Para comprobar que el servicio este funcionando correctamente, puede usar el siguiente comando:
 
 ```bash
-  $ netstat -tulpn | grep sshd
+netstat -tulpn | grep sshd
 ```
 
 ![checking sshd service](../../images/checking-ssh.png)

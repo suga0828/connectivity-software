@@ -2,14 +2,14 @@
 
 Un servidor DNS (Domain Name System) es un servicio que se utiliza para traducir los nombres de dominio de sitios web en direcciones IP (Protocolo de Internet). Cuando un usuario intenta acceder a un sitio web, el navegador web envía una solicitud al servidor DNS para resolver el nombre de dominio en una dirección IP. Una vez que se ha resuelto la dirección IP, el navegador web puede conectar con el servidor web que aloja el sitio web y solicitar su contenido.
 
-En resumen, un servidor DNS es un componente esencial de Internet que permite que los nombres de dominio se traduzcan en direcciones IP para que los usuarios puedan acceder a los sitios web. Sin un servidor DNS, los usuarios tendrían que recordar y utilizar las direcciones IP para acceder a los sitios web, lo que sería mucho más difícil que simplemente escribir un nombre de dominio fácil de recordar.
+Un servidor DNS es un componente esencial de Internet que permite que los nombres de dominio se traduzcan en direcciones IP para que los usuarios puedan acceder a los sitios web. Sin un servidor DNS, los usuarios tendrían que recordar y utilizar las direcciones IP para acceder a los sitios web, lo que sería mucho más difícil que simplemente escribir un nombre de dominio fácil de recordar.
 
 ### Instalacion de paquetes
 
 Para instalar el servidor DNS (BIND) en CentOS 7.1, ejecute el siguiente comando:
 
 ```bash
-  $ yum -y install bind bind-chroot bind-utils bind-libs caching-nameserver
+yum -y install bind bind-chroot bind-utils bind-libs caching-nameserver
 ```
 
 ---
@@ -42,29 +42,29 @@ Seccion para definir las rutas de ubicación de los archivos de configuración p
 una de las zonas.
 
 ```bash
-  options {
-    listen-on    port 53 { 127.0.0.1; 192.168.10.11; };
-    listen-on-v6 port 53 { ::1; 2001:db8:1::101; };
+options {
+  listen-on    port 53 { 127.0.0.1; 192.168.10.11; };
+  listen-on-v6 port 53 { ::1; 2001:db8:1::101; };
 
-    directory "/var/named";
-    dump-file "/var/named/data/cache_dump.db";
-    statistics-file "/var/named/data/named_stats.txt";
-    memstatistics-file "/var/named/data/named_mem_stats.txt";
+  directory "/var/named";
+  dump-file "/var/named/data/cache_dump.db";
+  statistics-file "/var/named/data/named_stats.txt";
+  memstatistics-file "/var/named/data/named_mem_stats.txt";
 
-    allow-query     { any; };
+  allow-query     { any; };
 
-    recursion yes;
-    notify yes;
+  recursion yes;
+  notify yes;
 
-    dnssec-enable yes;
-    dnssec-validation yes;
-    dnssec-lookaside auto;
-    bindkeys-file "/etc/named.iscdlv.key";
-    managed-keys-directory "/var/named/dynamic";
+  dnssec-enable yes;
+  dnssec-validation yes;
+  dnssec-lookaside auto;
+  bindkeys-file "/etc/named.iscdlv.key";
+  managed-keys-directory "/var/named/dynamic";
 
-    pid-file "/run/named/named.pid";
-    session-keyfile "/run/named/session.key";
-  };
+  pid-file "/run/named/named.pid";
+  session-keyfile "/run/named/session.key";
+};
 ```
 
 en este caso `192.168.10.11` y `2001:db8:1::101` son las IPv4 e IPv6 del servidor DNS, respectivamente.
@@ -74,64 +74,59 @@ en este caso `192.168.10.11` y `2001:db8:1::101` son las IPv4 e IPv6 del servido
 Seccion para definir el nivel de log del servidor DNS.
 
 ```bash
-  logging {
-    channel default_debug {
-      file "data/named.run";
-      severity dynamic;
-    };
+logging {
+  channel default_debug {
+    file "data/named.run";
+    severity dynamic;
   };
+};
 ```
 
 ##### Zonas IPv4
 
-Los servidores DNS basan sus configuraciones en la definición de zonas o dominios, y estos
-deben ser definidos inicialmente en el fichero “named.conf ”. En primer lugar hay que definir
-las zonas básicas para localhost, localdomain y las zonas para la resolución inversa que define
-las redes 127.0.0, 0. y 255.x.
+Los servidores DNS basan sus configuraciones en la definición de zonas o dominios, y estos deben ser definidos inicialmente en el fichero “named.conf ”. Las siguientes configuraciones van a ser parte de dicho archivo:
 
 - Zona `.`
 
 ```
-  zone "." IN {
-    type hintl
-    file "named.ca";
-  };
+zone "." IN {
+  type hintl
+  file "named.ca";
+};
 
-  include "/etc/named.rfc1912.zones";
-  include "/etc/named.root.key";
+include "/etc/named.rfc1912.zones";
+include "/etc/named.root.key";
 ```
 
 - Zona para IPv4
 
-En esta sección se definen las zonas para IPv4, también encontramos la definición para la
-resolución de dominios y direcciones IP tanto directas como inversas.
+En esta sección se definen las zonas para IPv4, también encontramos la definición para la resolución de dominios y direcciones IP tanto directas como inversas.
 
 ```
-  zone "example.com" IN {
-      type master;
-      file "example.com.zone";
-  };
-
-  zone "192.168.10.in-addr.arpa" {
+zone "example.com" IN {
     type master;
-    file "192.168.10.zone";
-  };
+    file "example.com.zone";
+};
+
+zone "192.168.10.in-addr.arpa" {
+  type master;
+  file "192.168.10.zone";
+};
 ```
 
 donde se ha usado `example.com` como nombre de dominio y `192.168.10` como porcion de red de la IPv4 del servidor DNS.
 
 ##### Zonas IPv6
 
-En esta sección se detallan las zonas para IPv6 y encontramos la definición para la resolución
-de dominios y direcciones IP tanto directas como inversas.
+En esta sección se detallan las zonas para IPv6 y encontramos la definición para la resolución de dominios y direcciones IP tanto directas como inversas.
 
 - Zona para IPv6
 
 ```
-  zone "0.0.0.0.1.0.0.0.8.b.d.0.1.0.0.2.ip6.arpa" {
-    type master;
-    file "2001_db8_1_0.zone";
-  };
+zone "0.0.0.0.1.0.0.0.8.b.d.0.1.0.0.2.ip6.arpa" {
+  type master;
+  file "2001_db8_1_0.zone";
+};
 ```
 
 #### Archivo de zonas directas
@@ -148,9 +143,15 @@ de dominios y direcciones IP tanto directas como inversas.
 Para verificar la sintaxis de los archivos de zona, ejecute el siguiente comando:
 
 ```bash
-  $ named-checkzone example.com example.com.zone
-  $ named-checkzone 192.168.10.zone
-  $ named-checkzone 2001_db8_1_0.zone
+named-checkzone example.com example.com.zone
+```
+
+```bash
+named-checkzone 192.168.10.zone
+```
+
+```bash
+named-checkzone 2001_db8_1_0.zone
 ```
 
 ---
@@ -160,14 +161,14 @@ Para verificar la sintaxis de los archivos de zona, ejecute el siguiente comando
 Para seleccionar el servidor DNS, se debe editar el archivo `/etc/resolv.conf` y colocar la del servidor DNS.
 
 ```bash
-  $ vim /etc/resolv.conf
+vim /etc/resolv.conf
 ```
 
 ```bash
-  # Generated by NetworkManager
-  search example.com
-  nameserver 2001:db8:1::101
-  nameserver 192.168.10.11
+# Generated by NetworkManager
+search example.com
+nameserver 2001:db8:1::101
+nameserver 192.168.10.11
 ```
 
 ![set DNS ips](../../images/set-dns-ip.png)
@@ -179,21 +180,20 @@ Para seleccionar el servidor DNS, se debe editar el archivo `/etc/resolv.conf` y
 Primero podemos reiniciar el servicio:
 
 ```
-  $ systemctl restart named
+systemctl restart named
 ```
 
 Para verificar que el servidor DNS esta desplegado adecuadamente, ejecute el siguiente comando:
 
 ```
-  netstat -tulpn | grep named
+netstat -tulpn | grep named
 ```
 
 Para verificar el funcionamiento del servidor DNS, ejecute alguno de los siguientes comandos:
 
 ```
-  $ nslookup
+nslookup
   > server
-
 ```
 
 Debe verse la configuracion del servidor DNS:
@@ -202,13 +202,34 @@ Debe verse la configuracion del servidor DNS:
 
 Tambien se pueden comprobar las diferentes consultas DNS con los siguientes comandos:
 
+```bash
+dig dns6.example.com AAAA
 ```
-  $ dig dns6.example.com AAAA
-  $ dig MX example.com
-  $ nslookup www.example.com
-  $ nslookup www6.example.com
-  $ nslookup pop6.example.com
-  $ nslookup imap6.example.com
-  $ nslookup smtp6.example.com
-  $ nslookup streaming6.example.com
+
+```bash
+dig MX example.com
+```
+
+```bash
+nslookup www.example.com
+```
+
+```bash
+nslookup www6.example.com
+```
+
+```bash
+nslookup pop6.example.com
+```
+
+```bash
+nslookup imap6.example.com
+```
+
+```bash
+nslookup smtp6.example.com
+```
+
+```bash
+nslookup streaming6.example.com
 ```
