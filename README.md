@@ -23,7 +23,7 @@ En este repositorio encontrará guias para la configuracion de algunos servicios
 
 ## Desarrollo local
 
-Para trabajar con el proyecto localmente, se debe instalar [MkDocs](https://www.mkdocs.org/getting-started/), el tema [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/) y el plugin [mkdocs-same-dir](https://github.com/oprypin/mkdocs-same-dir)
+Para trabajar con el proyecto localmente, se debe instalar <a href="https://www.mkdocs.org/getting-started/" target="_blank">MkDocs</a>, el tema <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank">Material for MkDocs</a> y el plugin <a href="https://github.com/oprypin/mkdocs-same-dir" target="_blank">mkdocs-same-dir</a>.
 
 ##### Instalacion
 
