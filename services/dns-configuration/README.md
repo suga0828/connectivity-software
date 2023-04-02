@@ -131,12 +131,13 @@ zone "0.0.0.0.1.0.0.0.8.b.d.0.1.0.0.2.ip6.arpa" {
 
 #### Archivo de zonas directas
 
-- Archivo [`/var/named/example.com.zone`](example.com.zone): El archivo “example.com.zone” contiene la definición del servidor DNS para la zona directa definida en el direccionamiento para IPv4 y se indica mediante el registro NS.
+- Archivo <a href="example.com.zone" target="_blank">/var/named/example.com.zone</a>: El archivo “example.com.zone” contiene la definición del servidor DNS para la zona directa definida en el direccionamiento para IPv4 y se indica mediante el registro NS.
 
 #### Archivo de zonas inversas
 
-- Archivo [`/var/named/192.168.10.zone`](192.168.10.zone): El archivo “192.168.10.zone” contiene la definición del servidor DNS para la zona inversa definida en el direccionamiento para IPv4 y se indica mediante el registro NS.
-- Archivo [`/var/named/2001_db8_1_0.zone`](2001_db8_1_0.zone): El archivo “2001_db8_1_0.zone” contiene la definición del servidor DNS para la zona directa definida en el direccionamiento para IPv6 y se indica mediante el registro NS.
+- Archivo <a href="192.168.10.zone" target="_blank">/var/named/192.168.10.zone</a>: El archivo “192.168.10.zone” contiene la definición del servidor DNS para la zona inversa definida en el direccionamiento para IPv4 y se indica mediante el registro NS.
+
+- Archivo <a href="2001_db8_1_0.zone" target="_blank">/var/named/2001_db8_1_0.zone</a>: El archivo “2001_db8_1_0.zone” contiene la definición del servidor DNS para la zona directa definida en el direccionamiento para IPv6 y se indica mediante el registro NS.
 
 ### Verificaciones de configuracion de archivos de zona
 

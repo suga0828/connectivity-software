@@ -36,7 +36,7 @@ Por defecto el servicio SSH esta configurado para escuchar en el `port 22`.
 
 ### Instalacion de FileZilla
 
-[FileZilla](https://filezilla-project.org/download.php?type=client) es un cliente FTP y SFTP multiplataforma. Es un software de código abierto y gratuito.
+<a href="https://filezilla-project.org/download.php?type=client" target="_blank">FileZilla</a> es un cliente FTP y SFTP multiplataforma. Es un software de código abierto y gratuito.
 
 ### Conexion a un servidor usando SFTP en FileZilla
 

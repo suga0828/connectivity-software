@@ -60,7 +60,7 @@ netstat -tulpn | grep httpd
 
 ### Carga del sitio web
 
-Para cargar el sitio web en el servidor, debe copiar el contenido del sitio web en la ruta `/var/www/html`. Para ello, puede usar una [conexion SFTP](../sftp/README.md). Puedes usar un archivo como este [index.html](./index.html)
+Para cargar el sitio web en el servidor, debe copiar el contenido del sitio web en la ruta `/var/www/html`. Para ello, puede usar una [conexion SFTP](../sftp/README.md). Puedes usar el archivo <a href="web-page.html" target="_blank">index.html</a> como ejemplo.
 
 ---
 

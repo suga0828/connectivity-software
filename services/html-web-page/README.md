@@ -16,4 +16,4 @@ La sintaxis basica de una pagina web hecha en HTML seria la siguiente:
 </html>
 ```
 
-Puede encontrar mas informacion sobre HTML en el siguiente enlace: [w3schools.com](https://www.w3schools.com/html/). Puede encontrar un ejemplo muy sencillo de una pagina web en el siguiente enlace: [index.html](../../services/apache-server/index.html)
+Puede encontrar mas informacion sobre HTML en el siguiente enlace: <a href="https://www.w3schools.com/html/" target="_blank">w3schools.com</a>. Puede encontrar un ejemplo muy sencillo de una pagina web en el siguiente enlace: <a href="../../services/apache-server/web-page.html" target="_blank">index.html</a>.

@@ -1,0 +1,23 @@
+site_name: Software de Conectividad
+site_description: Documentación de Software de Conectividad
+
+site_author: "Alexander Sandoval"
+
+site_url: "https://suga0828.github.io/connectivity-software/"
+
+repo_name: "connectivity-software"
+repo_url: "https://github.com/suga0828/connectivity-software"
+
+docs_dir: .
+
+theme:
+  name: material
+
+nav:
+  - Introducción: index.md
+  - "Guías":
+      - "Despliegue de una pagina web en HTML": "tutorials/web-page/README.md"
+
+plugins:
+  - search
+  - same-dir
