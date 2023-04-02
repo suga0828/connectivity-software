@@ -5,6 +5,7 @@ En este repositorio encontrará guias para la configuracion de algunos servicios
 ##### Requisitos
 
 - [Sistema operativo CentOS 7.1 (version Minimal-2009)](https://www.centos.org/download/). Puede instalarlo en una maquina virtual con [VirtualBox](https://www.virtualbox.org/wiki/Downloads) o en una maquina fisica.
+- Ejecutar la [configuracion inicial](tutorials/setup/README.md) para instalar las herramientas necesarias para seguir los tutoriales.
 
 ## Guias
 
