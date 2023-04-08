@@ -12,7 +12,7 @@ En este repositorio encontrará guias para la configuracion de algunos servicios
 ## Guias
 
 - [Despliegue de una pagina web en HTML](tutorials/web-page/README.md)
-<!-- - [Configuracion de servidor de correos](tutorials/email-server/README.md) -->
+- [Configuracion de un servidor de correo electronico](tutorials/email-server/README.md)
 
 ---
 

@@ -37,3 +37,15 @@ Instalar `netstat`:
 ```bash
 yum -y install net-tools
 ```
+
+Instalar `postfix`:
+
+```bash
+yum -y install postfix
+```
+
+Instalar `dovecot`:
+
+```bash
+yum -y install dovecot
+```
