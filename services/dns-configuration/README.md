@@ -108,7 +108,7 @@ zone "example.com" IN {
     file "example.com.zone";
 };
 
-zone "192.168.10.in-addr.arpa" {
+zone "10.168.192.in-addr.arpa" {
   type master;
   file "192.168.10.zone";
 };
