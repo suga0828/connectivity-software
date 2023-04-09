@@ -35,6 +35,20 @@ Ahora que tenemos el backup, vamos a editar el archivo `ifcfg-enp0s3` ejecutando
 Actualiza las siguientes lineas:
 
 ```bash
+  TYPE=Ethernet
+  PROXY_METHOD=none
+  BROWSER_ONLY=no
+  BOOTPROTO=dhcp
+  DEFROUTE=yes
+  IPV4_FAILURE_FATAL=no
+  IPV6INIT=yes
+  IPV6_AUTOCONF=yes
+  IPV6_DEFROUTE=yes
+  IPV6_FAILURE_FATAL=no
+  IPV6_ADDR_GEN_MODE=stable-privacy
+  NAME=enp0s3
+  UUID=XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
+  DEVICE=enp0s3
   ONBOOT=yes
 ```
 
