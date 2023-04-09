@@ -500,7 +500,7 @@ include &quot;/etc/named.root.key&quot;;
     file &quot;example.com.zone&quot;;
 };
 
-zone &quot;192.168.10.in-addr.arpa&quot; {
+zone &quot;10.168.192.in-addr.arpa&quot; {
   type master;
   file &quot;192.168.10.zone&quot;;
 };
@@ -533,7 +533,7 @@ zone &quot;192.168.10.in-addr.arpa&quot; {
 <p>Para verificar la sintaxis de los archivos de zona, ejecute el siguiente comando:</p>
 <pre><code class="language-bash">named-checkzone example.com example.com.zone
 </code></pre>
-<pre><code class="language-bash">named-checkzone 192.168.10.zone
+<pre><code class="language-bash">named-checkzone 192.168.10.53 192.168.10.zone
 </code></pre>
 <pre><code class="language-bash">named-checkzone 2001_db8_1_0.zone
 </code></pre>
@@ -551,7 +551,7 @@ nameserver 192.168.10.11
 <hr />
 <h3 id="verifcacion-del-servidor-dns">Verifcacion del servidor DNS</h3>
 <p>Primero podemos reiniciar el servicio:</p>
-<pre><code>systemctl restart named
+<pre><code>service named restart
 </code></pre>
 <p>Para verificar que el servidor DNS esta desplegado adecuadamente, ejecute el siguiente comando:</p>
 <pre><code>netstat -tulpn | grep named
