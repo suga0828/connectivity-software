@@ -1,0 +1,14 @@
+myhostname = smtp6.example.com
+mydomain = example.com
+myorigin = $myhostname
+inet_interfaces = all
+inet_protocols = all
+mydestination = example.com
+mynetworks = [::]
+home_mailbox = Maildir/
+mail_spool_directory = /var/spoll/mail
+readme_directory = /usr/share/doc/postfix-2.6.6/README_FILES
+
+smtp_bind_address6 = 2001:db8:1::101
+broken_sasl_auth_clients = yes
+append_dot_mydomain = no

@@ -12,7 +12,7 @@
         <meta name="author" content="Alexander Sandoval">
       
       
-        <link rel="canonical" href="https://suga0828.github.io/connectivity-software/tutorials/internet-connection/">
+        <link rel="canonical" href="https://suga0828.github.io/connectivity-software/tutorials/create-user/">
       
       
       
@@ -21,7 +21,7 @@
     
     
       
-        <title>Index - Software de Conectividad</title>
+        <title>Creacion de usuarios en Linux - Software de Conectividad</title>
       
     
     
@@ -69,7 +69,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#conexion-a-internet-de-una-maquina-virtual-en-centos-7" class="md-skip">
+        <a href="#creacion-de-usuarios-en-linux" class="md-skip">
           Saltar a contenido
         </a>
       
@@ -104,7 +104,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Index
+              Creacion de usuarios en Linux
             
           </span>
         </div>
@@ -287,34 +287,8 @@
   
   
   
+    
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Tabla de contenidos
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#conexion-a-internet-de-una-maquina-virtual-en-centos-7" class="md-nav__link">
-    Conexion a Internet de una maquina virtual en CentOS 7
-  </a>
-  
-    <nav class="md-nav" aria-label="Conexion a Internet de una maquina virtual en CentOS 7">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#notas" class="md-nav__link">
-    Notas
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
   
 </nav>
                   </div>
@@ -332,95 +306,13 @@
   
 
 
-  <h1>Index</h1>
-
-<h2 id="conexion-a-internet-de-una-maquina-virtual-en-centos-7">Conexion a Internet de una maquina virtual en CentOS 7</h2>
-<p>Enciende tu marquina virtual e inicia sesión como root.</p>
-<p><img alt="login as root" src="../../images/login.png" /></p>
-<p>Desde aca, vamos al siguiente directorio:</p>
-<pre><code class="language-bash">  cd /etc/sysconfig/network-scripts
+<h1 id="creacion-de-usuarios-en-linux">Creacion de usuarios en Linux</h1>
+<p>Para crear un usuario en Linux se debe utilizar el comando <code>adduser</code>.</p>
+<pre><code class="language-bash">adduser username
 </code></pre>
-<p>En este punto debemos ajustar la configuracion de la interfaz de la tarjeta de red que usaremos para conectarnos. <strong>En mi caso es la <code>enp0s3</code></strong>.</p>
-<p>Primero vamos a hacer un backup de nuevo archivo <code>ifcfg-enp0s3</code>, ejecutando el siguiente comando:</p>
-<pre><code class="language-bash">  cp ifcfg-enp0s3 ifcfg-enp0s3._backup
+<p>Para asignar la contraseña al usuario se debe utilizar el comando <code>passwd</code>.</p>
+<pre><code class="language-bash">passwd username
 </code></pre>
-<p>Para verificar que el backup fue creado correctamente ejecutamos el siguiente comando:</p>
-<pre><code class="language-bash">  ls -lah | grep ifcfg-enp0s3
-</code></pre>
-<p><img alt="listing file to check if backup was successful" src="../../images/checking-interface-backup.png" /></p>
-<p>Ahora que tenemos el backup, vamos a editar el archivo <code>ifcfg-enp0s3</code> ejecutando:</p>
-<pre><code class="language-bash">  vi ifcfg-enp0s3
-</code></pre>
-<p>Actualiza las siguientes lineas:</p>
-<pre><code class="language-bash">  TYPE=Ethernet
-  PROXY_METHOD=none
-  BROWSER_ONLY=no
-  BOOTPROTO=dhcp
-  DEFROUTE=yes
-  IPV4_FAILURE_FATAL=no
-  IPV6INIT=yes
-  IPV6_AUTOCONF=yes
-  IPV6_DEFROUTE=yes
-  IPV6_FAILURE_FATAL=no
-  IPV6_ADDR_GEN_MODE=stable-privacy
-  NAME=enp0s3
-  UUID=XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
-  DEVICE=enp0s3
-  ONBOOT=yes
-</code></pre>
-<p>Ahora, vamos a configurar la puerta de enlace en el archivo <code>/etc/sysconfig/network</code>. Para hacerlo ejecutamos:</p>
-<pre><code class="language-bash">  cd /etc/sysconfig
-</code></pre>
-<p>Nos aseguramos de hacer un backup de nuestro archivo <code>network</code>, ejecutando:</p>
-<pre><code class="language-bash">  cp network network_backup
-</code></pre>
-<p>Para verificar que el backup fue creado correctamente ejecutamos el siguiente comando:</p>
-<pre><code class="language-bash">  ls -lah | grep network
-</code></pre>
-<p><img alt="listing file to check if backup was successful" src="../../images/checking-network-backup.png" /></p>
-<p>Ahora agreamos algunas lineas al archivo <code>network</code>:</p>
-<pre><code class="language-bash">  vi network
-</code></pre>
-<p>Debe ser un archivo vacio, agregamos las siguientes lineas:</p>
-<pre><code class="language-bash">  NETWORKING=yes
-  HOSTNAME=centos7
-  GATEWAY=192.168.10.1
-</code></pre>
-<p>Deberia quedar coi algo como esto:</p>
-<p><img alt="setting up gateway" src="../../images/setting-gateway.png" /></p>
-<p>El valor de <code>GATEWAY</code> es la puerta de enlace de tu maquina host. En este caso, es <code>192.168.10.1</code>.</p>
-<p>Ahora vamos a configurar el name servers en el archivo <code>/etc/resolv.conf</code>. Para ir a la carpeta ejecutamos:</p>
-<pre><code class="language-bash">  cd /etc
-</code></pre>
-<p>Como siempre, hacemos un backup del archivo <code>resolv.conf</code> ejecutando:</p>
-<pre><code class="language-bash">  cp resolv.conf resolv.conf_backup
-</code></pre>
-<p>Para verificar que el backup fue creado correctamente ejecutamos el siguiente comando:</p>
-<pre><code class="language-bash">  ls -lah | grep resolv.conf
-</code></pre>
-<p><img alt="listing file to check if backup was successful" src="../../images/checking-resolv-backup.png" /></p>
-<p>Ahora agregamos algunas lineas al archivo <code>resolv.conf</code>:</p>
-<pre><code class="language-bash">  vi resolv.conf
-</code></pre>
-<p>Inicialmente debe ser un archivo vacio, agregamos las siguientes lineas:</p>
-<pre><code class="language-bash">  nameserver 8.8.8.8
-  nameserver 8.8.4.4
-</code></pre>
-<p>Antes de continuar tenemos que asegurarnos que nuestra maquina virtual tiene el adaptador de red configurado correctamente. En este caso estamos usando el adaptador NAT Network Adapter. <strong>Si tienes que configurarlo y tu maquina virtual esta encendida, tienes que reiniciarla</strong>.</p>
-<p><img alt="Network Adapter" src="../../images/network-adapter.png" /></p>
-<p>Ya casi estamos. Nos aseguramos de reiniciar el servicio de red ejecutando:</p>
-<pre><code class="language-bash">  systemctl restart network
-</code></pre>
-<p>Ahora, vamos a probar nuestra conexion a internet ejecutando:</p>
-<pre><code class="language-bash">  ping google.com
-</code></pre>
-<p><img alt="ping google.com" src="../../images/checking-connection.png" /></p>
-<hr />
-<h3 id="notas">Notas</h3>
-<p>Si quieres saber cual es la ip de tu maquina virtual, ejecuta:</p>
-<pre><code class="language-bash">  ip addr
-</code></pre>
-<p><img alt="ip addr" src="../../images/ip-checking.png" /></p>
 
 
 

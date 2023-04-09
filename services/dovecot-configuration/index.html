@@ -12,7 +12,7 @@
         <meta name="author" content="Alexander Sandoval">
       
       
-        <link rel="canonical" href="https://suga0828.github.io/connectivity-software/tutorials/internet-connection/">
+        <link rel="canonical" href="https://suga0828.github.io/connectivity-software/services/dovecot-configuration/">
       
       
       
@@ -21,7 +21,7 @@
     
     
       
-        <title>Index - Software de Conectividad</title>
+        <title>Configuracion de un servicio Postfix - Software de Conectividad</title>
       
     
     
@@ -69,7 +69,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#conexion-a-internet-de-una-maquina-virtual-en-centos-7" class="md-skip">
+        <a href="#configuracion-de-un-servicio-postfix" class="md-skip">
           Saltar a contenido
         </a>
       
@@ -104,7 +104,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Index
+              Configuracion de un servicio Postfix
             
           </span>
         </div>
@@ -256,7 +256,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../web-page/" class="md-nav__link">
+      <a href="../../tutorials/web-page/" class="md-nav__link">
         Despliegue de una pagina web en HTML
       </a>
     </li>
@@ -287,6 +287,8 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -295,22 +297,83 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#conexion-a-internet-de-una-maquina-virtual-en-centos-7" class="md-nav__link">
-    Conexion a Internet de una maquina virtual en CentOS 7
+  <a href="#instalacion-de-paquetes" class="md-nav__link">
+    Instalacion de paquetes
   </a>
   
-    <nav class="md-nav" aria-label="Conexion a Internet de una maquina virtual en CentOS 7">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuracion-de-archivos" class="md-nav__link">
+    Configuracion de archivos
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuracion de archivos">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#notas" class="md-nav__link">
-    Notas
+  <a href="#etcdovecotdovecotconf" class="md-nav__link">
+    /etc/dovecot/dovecot.conf
+  </a>
+  
+    <nav class="md-nav" aria-label="/etc/dovecot/dovecot.conf">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#protocols" class="md-nav__link">
+    protocols
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#listen" class="md-nav__link">
+    listen
   </a>
   
 </li>
         
       </ul>
     </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#etcdovecotconfd10-authconf" class="md-nav__link">
+    /etc/dovecot/conf.d/10-auth.conf
+  </a>
+  
+    <nav class="md-nav" aria-label="/etc/dovecot/conf.d/10-auth.conf">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#disable_plaintext_auth" class="md-nav__link">
+    disable_plaintext_auth
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#auth_mechanisms" class="md-nav__link">
+    auth_mechanisms
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#verifcacion-del-servicio-dovecot" class="md-nav__link">
+    Verifcacion del servicio Dovecot
+  </a>
   
 </li>
       
@@ -332,95 +395,54 @@
   
 
 
-  <h1>Index</h1>
-
-<h2 id="conexion-a-internet-de-una-maquina-virtual-en-centos-7">Conexion a Internet de una maquina virtual en CentOS 7</h2>
-<p>Enciende tu marquina virtual e inicia sesión como root.</p>
-<p><img alt="login as root" src="../../images/login.png" /></p>
-<p>Desde aca, vamos al siguiente directorio:</p>
-<pre><code class="language-bash">  cd /etc/sysconfig/network-scripts
+<h1 id="configuracion-de-un-servicio-postfix">Configuracion de un servicio Postfix</h1>
+<p>Dovecot es un servidor de correo electrónico IMAP y POP3. Dovecot es un servidor de correo electrónico de código abierto que se ejecuta en Linux y otros sistemas operativos Unix. Dovecot está diseñado para ser rápido, pequeño y fácil de configurar. Dovecot está escrito principalmente en C y se basa en el servidor de correo electrónico Courier.</p>
+<h3 id="instalacion-de-paquetes">Instalacion de paquetes</h3>
+<p>Para instalar el servicio Dovecot en CentOS 7.1, ejecute el siguiente comando:</p>
+<pre><code class="language-bash">yum -y install dovecot
 </code></pre>
-<p>En este punto debemos ajustar la configuracion de la interfaz de la tarjeta de red que usaremos para conectarnos. <strong>En mi caso es la <code>enp0s3</code></strong>.</p>
-<p>Primero vamos a hacer un backup de nuevo archivo <code>ifcfg-enp0s3</code>, ejecutando el siguiente comando:</p>
-<pre><code class="language-bash">  cp ifcfg-enp0s3 ifcfg-enp0s3._backup
-</code></pre>
-<p>Para verificar que el backup fue creado correctamente ejecutamos el siguiente comando:</p>
-<pre><code class="language-bash">  ls -lah | grep ifcfg-enp0s3
-</code></pre>
-<p><img alt="listing file to check if backup was successful" src="../../images/checking-interface-backup.png" /></p>
-<p>Ahora que tenemos el backup, vamos a editar el archivo <code>ifcfg-enp0s3</code> ejecutando:</p>
-<pre><code class="language-bash">  vi ifcfg-enp0s3
-</code></pre>
-<p>Actualiza las siguientes lineas:</p>
-<pre><code class="language-bash">  TYPE=Ethernet
-  PROXY_METHOD=none
-  BROWSER_ONLY=no
-  BOOTPROTO=dhcp
-  DEFROUTE=yes
-  IPV4_FAILURE_FATAL=no
-  IPV6INIT=yes
-  IPV6_AUTOCONF=yes
-  IPV6_DEFROUTE=yes
-  IPV6_FAILURE_FATAL=no
-  IPV6_ADDR_GEN_MODE=stable-privacy
-  NAME=enp0s3
-  UUID=XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
-  DEVICE=enp0s3
-  ONBOOT=yes
-</code></pre>
-<p>Ahora, vamos a configurar la puerta de enlace en el archivo <code>/etc/sysconfig/network</code>. Para hacerlo ejecutamos:</p>
-<pre><code class="language-bash">  cd /etc/sysconfig
-</code></pre>
-<p>Nos aseguramos de hacer un backup de nuestro archivo <code>network</code>, ejecutando:</p>
-<pre><code class="language-bash">  cp network network_backup
-</code></pre>
-<p>Para verificar que el backup fue creado correctamente ejecutamos el siguiente comando:</p>
-<pre><code class="language-bash">  ls -lah | grep network
-</code></pre>
-<p><img alt="listing file to check if backup was successful" src="../../images/checking-network-backup.png" /></p>
-<p>Ahora agreamos algunas lineas al archivo <code>network</code>:</p>
-<pre><code class="language-bash">  vi network
-</code></pre>
-<p>Debe ser un archivo vacio, agregamos las siguientes lineas:</p>
-<pre><code class="language-bash">  NETWORKING=yes
-  HOSTNAME=centos7
-  GATEWAY=192.168.10.1
-</code></pre>
-<p>Deberia quedar coi algo como esto:</p>
-<p><img alt="setting up gateway" src="../../images/setting-gateway.png" /></p>
-<p>El valor de <code>GATEWAY</code> es la puerta de enlace de tu maquina host. En este caso, es <code>192.168.10.1</code>.</p>
-<p>Ahora vamos a configurar el name servers en el archivo <code>/etc/resolv.conf</code>. Para ir a la carpeta ejecutamos:</p>
-<pre><code class="language-bash">  cd /etc
-</code></pre>
-<p>Como siempre, hacemos un backup del archivo <code>resolv.conf</code> ejecutando:</p>
-<pre><code class="language-bash">  cp resolv.conf resolv.conf_backup
-</code></pre>
-<p>Para verificar que el backup fue creado correctamente ejecutamos el siguiente comando:</p>
-<pre><code class="language-bash">  ls -lah | grep resolv.conf
-</code></pre>
-<p><img alt="listing file to check if backup was successful" src="../../images/checking-resolv-backup.png" /></p>
-<p>Ahora agregamos algunas lineas al archivo <code>resolv.conf</code>:</p>
-<pre><code class="language-bash">  vi resolv.conf
-</code></pre>
-<p>Inicialmente debe ser un archivo vacio, agregamos las siguientes lineas:</p>
-<pre><code class="language-bash">  nameserver 8.8.8.8
-  nameserver 8.8.4.4
-</code></pre>
-<p>Antes de continuar tenemos que asegurarnos que nuestra maquina virtual tiene el adaptador de red configurado correctamente. En este caso estamos usando el adaptador NAT Network Adapter. <strong>Si tienes que configurarlo y tu maquina virtual esta encendida, tienes que reiniciarla</strong>.</p>
-<p><img alt="Network Adapter" src="../../images/network-adapter.png" /></p>
-<p>Ya casi estamos. Nos aseguramos de reiniciar el servicio de red ejecutando:</p>
-<pre><code class="language-bash">  systemctl restart network
-</code></pre>
-<p>Ahora, vamos a probar nuestra conexion a internet ejecutando:</p>
-<pre><code class="language-bash">  ping google.com
-</code></pre>
-<p><img alt="ping google.com" src="../../images/checking-connection.png" /></p>
 <hr />
-<h3 id="notas">Notas</h3>
-<p>Si quieres saber cual es la ip de tu maquina virtual, ejecuta:</p>
-<pre><code class="language-bash">  ip addr
+<h3 id="configuracion-de-archivos">Configuracion de archivos</h3>
+<ul>
+<li>Archivo de configuracion general <a href="#etcdovecotdovecotconf">/etc/dovecot/dovecot.conf</a>.</li>
+<li><a href="#etcdovecotdovecotconf"><em>protocols</em></a></li>
+<li><a href="#etcdovecotdovecotconf"><em>listen</em></a></li>
+<li>Archivo de autenticacion <a href="#etcdovecotconfd10-authconf">/etc/dovecot/conf.d/10-auth.conf</a>.</li>
+<li><a href="#etcdovecotconfd10-authconf"><em>disable_plaintext_auth</em></a></li>
+<li><a href="#etcdovecotconfd10-authconf"><em>auth_mechanisms</em></a></li>
+</ul>
+<h4 id="etcdovecotdovecotconf">/etc/dovecot/dovecot.conf</h4>
+<p>Dovecot tiene varios cientos de parámetros de configuración que se controlan a través del archivo <code>dovecot.conf</code>. Afortunadamente, todos los parámetros tienen valores predeterminados razonables. En muchos casos, necesita configurar solo dos o tres parámetros antes de iniciar el sistema de correo.</p>
+<h6 id="protocols"><em>protocols</em></h6>
+<p>Directiva “protocols”: si se desea activar los servicios POP e IMAP, estos se deben indicar
+en la directiva “protocols” así: Para activar los servicios POP, POP3S, IMAP e IMAPS, estos se deben indicar en la directiva
+“protocols”:</p>
+<pre><code class="language-bash">protocols = imap pop3 lmtp
 </code></pre>
-<p><img alt="ip addr" src="../../images/ip-checking.png" /></p>
+<h6 id="listen"><em>listen</em></h6>
+<p>Directiva Listen: esta directiva activa el servicio sobre IPv6; se puede pueden utilizar las
+siguientes opciones según el protocolo que se quiera habilitar.</p>
+<pre><code class="language-bash">listen = *, ::
+</code></pre>
+<h4 id="etcdovecotconfd10-authconf">/etc/dovecot/conf.d/10-auth.conf</h4>
+<h6 id="disable_plaintext_auth"><em>disable_plaintext_auth</em></h6>
+<p>Directiva “disable_plaintext_auth”: esta directiva deshabilita la autenticación en texto plano.</p>
+<pre><code class="language-bash">disable_plaintext_auth = no
+</code></pre>
+<h6 id="auth_mechanisms"><em>auth_mechanisms</em></h6>
+<p>Directiva “auth_mechanisms”: esta directiva indica el mecanismo de autenticación que se</p>
+<pre><code class="language-bash">auth_mechanisms = plain login
+</code></pre>
+<hr />
+<h3 id="verifcacion-del-servicio-dovecot">Verifcacion del servicio Dovecot</h3>
+<p>Primero debemos iniciar el servicio:</p>
+<pre><code class="language-bash">systemctl start dovecot
+</code></pre>
+<p>Para verificar que el servidor de correo esta desplegado adecuadamente, ejecute el siguiente comando:</p>
+<pre><code class="language-bash">netstat -tulpn | grep 143
+netstat -tulpn | grep 110
+</code></pre>
+<p><img alt="dovecot-check" src="../../images/dovecot-check.png" /></p>
 
 
 
