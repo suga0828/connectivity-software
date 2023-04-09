@@ -108,7 +108,7 @@ zone "example.com" IN {
     file "example.com.zone";
 };
 
-zone "192.168.10.in-addr.arpa" {
+zone "10.168.192.in-addr.arpa" {
   type master;
   file "192.168.10.zone";
 };
@@ -148,7 +148,7 @@ named-checkzone example.com example.com.zone
 ```
 
 ```bash
-named-checkzone 192.168.10.zone
+named-checkzone 192.168.10.53 192.168.10.zone
 ```
 
 ```bash
@@ -181,7 +181,7 @@ nameserver 192.168.10.11
 Primero podemos reiniciar el servicio:
 
 ```
-systemctl restart named
+service named restart
 ```
 
 Para verificar que el servidor DNS esta desplegado adecuadamente, ejecute el siguiente comando:
