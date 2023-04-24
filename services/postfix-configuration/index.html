@@ -400,6 +400,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#envio-de-un-correo-de-prueba" class="md-nav__link">
+    Envio de un correo de prueba
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -490,6 +497,20 @@ systemctl status postfix
 </code></pre>
 <p>Para verificar el funcionamiento del servidor de correo, probamos la conexion al servidor ejecutando el siguiente comando:</p>
 <pre><code class="language-bash">telnet smtp.example.com 25
+</code></pre>
+<hr />
+<h3 id="envio-de-un-correo-de-prueba">Envio de un correo de prueba</h3>
+<p>Para enviar un correo podemos utilizar la herramienta <code>telnet</code>. Para conectarnos al servidor de correo ejecutamos el siguiente comando:</p>
+<pre><code class="language-bash">telnet example.com 25
+</code></pre>
+<p>Y presione enter. Luego de cada uno de los siguientes comando hay que ir presionando enter. En los siguientes comandos <code>&lt;sender email&gt;</code>, <code>&lt;recipient email&gt;</code>, <code>&lt;subject email&gt;</code> y <code>&lt;body email&gt;</code> son el correo del remitente, el correo del destinatario, el asunto del correo y el cuerpo del correo respectivamente. En el siguiente ejemplo se envia un correo electronico a un usuario de la misma maquina.</p>
+<pre><code class="language-bash">ehlo localhost
+mail from: &lt;sender email&gt;
+rcpt to: &lt;recipient email&gt;
+data
+Subject: &lt;subject email&gt;
+&lt;body email&gt;
+.
 </code></pre>
 
 
